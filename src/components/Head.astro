@@ -1,0 +1,22 @@
+---
+import { description } from '../lib/site';
+interface Props { title: string; redirect?: boolean; pagePath?: string; }
+const { title, redirect = false, pagePath } = Astro.props;
+---
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content={description} />
+<title>{title}｜べちぱーCup</title>
+{pagePath && !redirect && (
+  <>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title + '｜べちぱーCup'} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="https://betty-roulette.github.io/images/IMG-021_ogp.png" />
+    <meta property="og:url" content={new URL(pagePath, Astro.site).href} />
+  </>
+)}
+<link rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48" href="/images/favicon.ico" />
+<link rel="icon" type="image/png" sizes="192x192" href="/images/favicon-192.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/images/apple-touch-icon.png" />
+{redirect && <meta http-equiv="refresh" content="0;url=./betipercup/" />}
